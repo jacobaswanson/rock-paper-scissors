@@ -49,7 +49,13 @@ function game(){
         let wins = 0;
         let losses = 0;
         if(roundResult = 0){
-            
+            losses += 1;
+            console.log(`Ouch, you lost. Current Score: ${wins} - ${losses}`)
+        }else if(roundResult = 1){
+            wins += 1;
+            console.log(`Nice! you won! Current Score: ${wins} - ${losses}`)
+        }else if(roundResult = 2){
+            console.log(`You tied!!!! Current Score: ${wins} - ${losses}`)
         }
     }
 }
