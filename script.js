@@ -8,7 +8,7 @@ function getComputerChoice(){
 }
 
 function getUserChoice(){
-    const selection = prompt("Enter your choice; Rock, Paper or Scissors: ").toLowerCase;
+    const selection = prompt("Enter your choice; Rock, Paper or Scissors: ");
     return selection;
 }
 
@@ -41,21 +41,27 @@ function playRound(){
             result = 2;
         }
     }
+    console.log(userChoice);
+    console.log(result);
+    return result;
 }
 
 function game(){
+    let wins = 0;
+    let losses = 0;
     for(let i = 0; i < 5; i++){
         let roundResult = playRound();
-        let wins = 0;
-        let losses = 0;
-        if(roundResult = 0){
+        console.log(`Play round: ${roundResult}`)
+        if(roundResult === 0){
             losses += 1;
             console.log(`Ouch, you lost. Current Score: ${wins} - ${losses}`)
-        }else if(roundResult = 1){
+        }else if(roundResult === 1){
             wins += 1;
             console.log(`Nice! you won! Current Score: ${wins} - ${losses}`)
-        }else if(roundResult = 2){
+        }else if(roundResult === 2){
             console.log(`You tied!!!! Current Score: ${wins} - ${losses}`)
         }
     }
 }
+
+game();
