@@ -7,10 +7,10 @@ function getComputerChoice(){
     return selection;
 }
 
-let computerSelection = getComputerChoice();
-console.log(computerSelection);
-
+function getUserChoice(){
+    const selection = prompt("Enter your choice; Rock, Paper or Scissors: ").toLowerCase;
+    return selection;
+}
 
 function playRound(){
-
 }
