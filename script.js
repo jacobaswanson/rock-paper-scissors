@@ -12,9 +12,7 @@ function getUserChoice(){
     return selection;
 }
 
-function playRound(){
-    const userChoice = getUserChoice();
-    const computerChoice = getComputerChoice();
+function playRound(userChoice, computerChoice){
     let result = 2;
     if(userChoice === 'rock'){
         if(computerChoice === 'rock'){
@@ -41,8 +39,6 @@ function playRound(){
             result = 2;
         }
     }
-    console.log(userChoice);
-    console.log(result);
     return result;
 }
 
@@ -50,8 +46,10 @@ function game(){
     let wins = 0;
     let losses = 0;
     for(let i = 0; i < 5; i++){
-        let roundResult = playRound();
-        console.log(`Play round: ${roundResult}`)
+        let userChoice = getUserChoice();
+        let computerChoice = getComputerChoice();
+        let roundResult = playRound(userChoice, computerChoice);
+        console.log(`You chose ${userChoice} and the computer chose ${computerChoice}`)
         if(roundResult === 0){
             losses += 1;
             console.log(`Ouch, you lost that round. Current Score: ${wins} - ${losses}`)
@@ -71,5 +69,4 @@ function game(){
     }
 
 }
-
 game();
