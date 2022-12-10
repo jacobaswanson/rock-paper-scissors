@@ -54,14 +54,22 @@ function game(){
         console.log(`Play round: ${roundResult}`)
         if(roundResult === 0){
             losses += 1;
-            console.log(`Ouch, you lost. Current Score: ${wins} - ${losses}`)
+            console.log(`Ouch, you lost that round. Current Score: ${wins} - ${losses}`)
         }else if(roundResult === 1){
             wins += 1;
-            console.log(`Nice! you won! Current Score: ${wins} - ${losses}`)
+            console.log(`Nice! You won that round! Current Score: ${wins} - ${losses}`)
         }else if(roundResult === 2){
-            console.log(`You tied!!!! Current Score: ${wins} - ${losses}`)
+            console.log(`You tied that round. Current Score: ${wins} - ${losses}`)
         }
     }
+    if(wins > losses){
+        console.log(`Nice job! You won the game with a final score of ${wins} - ${losses}!`);
+    }else if(losses > wins){
+        console.log(`Dang... the computer won with a final score of ${wins} - ${losses}. Better luck next time!`);
+    }else{
+        console.log(`It's a tie! Final Score: ${wins} - ${losses}`);
+    }
+
 }
 
 game();
