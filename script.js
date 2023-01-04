@@ -1,3 +1,32 @@
+const rock = document.createElement('button');
+const paper = document.createElement('button');
+const scissors = document.createElement('button');
+const main = document.querySelector('#main');
+const second = document.querySelector('#second');
+const btndiv = document.querySelector('#btndiv');
+var wins = 0;
+var losses = 0;
+
+rock.textContent = "I choose Rock!";
+paper.textContent = "I choose Paper!";
+scissors.textContent = "I choose Scissors!";
+
+rock.addEventListener('click', () => {
+    playRound('rock', getComputerChoice());
+});
+
+paper.addEventListener('click', () => {
+    playRound('paper', getComputerChoice());
+});
+
+scissors.addEventListener('click', () => {
+    playRound('scissors', getComputerChoice());
+});
+
+btndiv.appendChild(rock);
+btndiv.appendChild(paper);
+btndiv.appendChild(scissors);
+
 function getComputerChoice(){
     const options = ['rock', 'paper', 'scissors'];
     var rand = Math.random();
@@ -7,66 +36,49 @@ function getComputerChoice(){
     return selection;
 }
 
-function getUserChoice(){
-    const selection = prompt("Enter your choice; Rock, Paper or Scissors: ");
-    return selection;
-}
-
 function playRound(userChoice, computerChoice){
-    let result = 2;
     if(userChoice === 'rock'){
         if(computerChoice === 'rock'){
-            result = 2;
+            second.textContent = `The computer also chose ${computerChoice}. It's a tie! Make another selection to continue playing.`
         }else if(computerChoice === 'paper'){
-            result = 0;
+            losses++;
+            second.textContent = `The computer chose ${computerChoice}. Bummer! You lost! Make another selection to continue playing.`
         }else if(computerChoice === 'scissors'){
-            result = 1;
+            wins++;
+            second.textContent = `The computer chose ${computerChoice}. Nice! You won! Make another selection to continue playing.`
         }
     }else if(userChoice === 'paper'){
         if(computerChoice === 'rock'){
-            result = 1;
+            wins++;
+            second.textContent = `The computer chose ${computerChoice}. Nice! You won! Make another selection to continue playing.`
         }else if(computerChoice === 'paper'){
-            result = 2;
+            second.textContent = `The computer also chose ${computerChoice}. It's a tie! Make another selection to continue playing.`
         }else if(computerChoice === 'scissors'){
-            result = 0;
+            losses++;
+            second.textContent = `The computer chose ${computerChoice}. Bummer! You lost! Make another selection to continue playing.`
         }
     }else if(userChoice === 'scissors'){
         if(computerChoice === 'rock'){
-            result = 0;
+            losses++;
+            second.textContent = `The computer chose ${computerChoice}. Bummer! You lost! Make another selection to continue playing.`
         }else if(computerChoice === 'paper'){
-            result = 1;
+            wins++;
+            second.textContent = `The computer chose ${computerChoice}. Nice! You won! Make another selection to continue playing.`
         }else if(computerChoice === 'scissors'){
-            result = 2;
+            second.textContent = `The computer also chose ${computerChoice}. It's a tie! Make another selection to continue playing.`
         }
     }
-    return result;
-}
-
-function game(){
-    let wins = 0;
-    let losses = 0;
-    for(let i = 0; i < 5; i++){
-        let userChoice = getUserChoice();
-        let computerChoice = getComputerChoice();
-        let roundResult = playRound(userChoice, computerChoice);
-        console.log(`You chose ${userChoice} and the computer chose ${computerChoice}`)
-        if(roundResult === 0){
-            losses += 1;
-            console.log(`Ouch, you lost that round. Current Score: ${wins} - ${losses}`)
-        }else if(roundResult === 1){
-            wins += 1;
-            console.log(`Nice! You won that round! Current Score: ${wins} - ${losses}`)
-        }else if(roundResult === 2){
-            console.log(`You tied that round. Current Score: ${wins} - ${losses}`)
-        }
+    if(wins === 5){
+        btndiv.removeChild(rock);
+        btndiv.removeChild(paper);
+        btndiv.removeChild(scissors);
+        btndiv.textContent = 'Nice Job! You beat the computer!';
+    }else if(losses === 5){
+        btndiv.removeChild(rock);
+        btndiv.removeChild(paper);
+        btndiv.removeChild(scissors);
+        btndiv.textContent = 'Darn! The computer beat you!';
     }
-    if(wins > losses){
-        console.log(`Nice job! You won the game with a final score of ${wins} - ${losses}!`);
-    }else if(losses > wins){
-        console.log(`Dang... the computer won with a final score of ${wins} - ${losses}. Better luck next time!`);
-    }else{
-        console.log(`It's a tie! Final Score: ${wins} - ${losses}`);
-    }
-
+    main.textContent = `Wins: ${wins} Losses: ${losses}`;
+    return;
 }
-game();
